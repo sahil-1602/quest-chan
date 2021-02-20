@@ -16,27 +16,24 @@ import Question from "./views/Question";
 const useStyles = makeStyles((theme) => ({
     root: {
         // padding: '2px 4px',
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyItems: "center"
-        // width: 400,
+        display: 'flex',
+        flexDirection: "column",
+        alignItems: 'center',
+        justifyContent: "center",
+        // left: "50%",
         // position: "absolute",
+        height: "100vh",
     },
     root2: {
       // alignItems: "center",
       // justifyItems: "center",
       //   height: "100vh",
       //   width: "80vw",
-
     },
     scrollTopButton: {
-        // display: "grid",
         position: 'fixed',
         marginTop: 50,
-        // center: 1,
         top: theme.spacing(4),
-        // bottom: theme.spacing(4),
-        // right: theme.spacing(8),
     },
     topAnchor: {
         // look into hiding this idiot toolbar
@@ -53,8 +50,6 @@ function App() {
   return (
       <QuestionListProvider>
           <div className={classes.root}>
-              <Grid container className={classes.root2} style={{ minHeight: "100vh"}}
-                    alignItems={"center"} direction={"column"}>
                   <ElevationScroll >
                       <ActionBar/>
                   </ElevationScroll>
@@ -70,8 +65,6 @@ function App() {
                       <Route exact path={"/"} render={() => <QuestionList/>} />
                       <Route path='/question/:questionId' render={(props) => <Question {...props}/>} />
                   </Switch>
-                  {/*<QuestionList />*/}
-              </Grid>
           </div>
       </QuestionListProvider>
   );

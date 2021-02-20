@@ -3,15 +3,17 @@ import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
-import {IconButton} from "@material-ui/core";
+import {Grid, IconButton} from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import {ShareRounded} from "@material-ui/icons";
 import Card from "@material-ui/core/Card";
 import {makeStyles} from "@material-ui/core/styles";
+import QuestionCard from "../components/QuestionCard";
 
 const useStyles = makeStyles({
     root: {
         minWidth: 800,
+        maxHeight: 60,
         // maxWidth: 600,
         margin: '10px 10px'
     },
@@ -26,6 +28,9 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    question: {
+        minWidth: "800"
+    }
 });
 
 export default function Question(props) {
@@ -57,27 +62,32 @@ export default function Question(props) {
     }
     else {
         return (
-            <Card className={classes.root} >
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        #tag1 #tag2
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        {question.query}
-                    </Typography>
-                    <Typography variant="body2" component="p" color={"textSecondary"}>
-                        {question.description}
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareRounded />
-                    </IconButton>
-                </CardActions>
-            </Card>
+            <div>
+                <Typography variant="h5" component="h2">
+                    {question.query}
+                </Typography>
+                <Typography variant="body2" component="p" color={"textSecondary"}>
+                    {question.description}
+                </Typography>
+            </div>
+            // <div>
+            //
+            // </div>
+            // <Card className={classes.root} >
+            //     <CardContent>
+            //         <Typography className={classes.title} color="textSecondary" gutterBottom>
+            //             #tag1 #tag2
+            //         </Typography>
+            //     </CardContent>
+            //     <CardActions disableSpacing>
+            //         <IconButton aria-label="add to favorites">
+            //             <FavoriteIcon />
+            //         </IconButton>
+            //         <IconButton aria-label="share">
+            //             <ShareRounded />
+            //         </IconButton>
+            //     </CardActions>
+            // </Card>
         )
     }
 }
