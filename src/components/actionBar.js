@@ -14,8 +14,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import {CssBaseline} from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+
+/***
+ * Main ActionBar that stays persistent throughout the app
+ * ***/
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -66,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '20ch',
         },
+    },
+    anchorTop: {
+      visibility: "collapse",
     },
     sectionDesktop: {
         display: 'none',
@@ -243,6 +249,7 @@ export default function ActionBar(props) {
                         </IconButton>
                     </div>
                 </Toolbar>
+                {/*<Toolbar id="back-to-top-anchor" className={classes.anchorTop}/>*/}
             </AppBar>
             {renderMobileMenu}
             {renderMenu}

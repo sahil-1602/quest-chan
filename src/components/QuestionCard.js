@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import {IconButton, Paper} from "@material-ui/core";
 import {ExpandMoreRounded, ShareRounded} from "@material-ui/icons";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import {useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -40,28 +41,45 @@ const useStyles = makeStyles({
     // },
 });
 
-export default function SimpleCard() {
+export default function QuestionCard(props) {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+    const history = useHistory();
+    const {query, description, img, isOpen, _id} = props.question;
+    // const [question, setQuestion] = useContext(QuestionContext);
+
+    const mouseDownCoords = e => {
+        window.checkForDrag = e.clientX;
+    };
+
+    const clickOrDrag = e => {
+        const mouseUp = e.clientX;
+        if (
+            mouseUp < window.checkForDrag + 6 &&
+            mouseUp > window.checkForDrag - 6
+        ) {
+            handleClick();
+        }
+    };
+
+    const handleClick = () => {
+        let url = `/question/${_id}`;
+        history.push(url);
+    }
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root}
+              onMouseDown={(event => mouseDownCoords(event))}
+              onMouseUp={(event) => clickOrDrag(event)}>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                     #tag1 #tag2
                 </Typography>
                 <Typography variant="h5" component="h2">
-                    Is my use of useMemo() appropriate?
+                    {query}
                 </Typography>
-                {/*<Typography className={classes.pos} color="textSecondary">*/}
-                {/*    adjective*/}
-                {/*</Typography>*/}
-                <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                <Typography variant="body2" component="p" color={"textSecondary"}>
+                    {description}
                 </Typography>
-                {/*<Paper variant={"outlined"} />*/}
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
@@ -80,9 +98,6 @@ export default function SimpleCard() {
                 {/*>*/}
                 {/*    <ExpandMoreRounded />*/}
                 {/*</IconButton>*/}
-            </CardActions>
-            <CardActions>
-                <Button size="small">Learn More</Button>
             </CardActions>
         </Card>
     );
