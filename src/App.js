@@ -8,10 +8,12 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {QuestionListProvider} from "./contexts/QuestionList.context";
+import {UserProvider} from "./contexts/user.context";
 import QuestionList from "./views/QuestionList";
 import ScrollTop from "./components/ScrollToTopButton";
 import {Route, Switch} from "react-router-dom";
 import Question from "./views/Question";
+import QuestionForm from "./views/QuestionForm";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +51,7 @@ function App() {
 
   return (
       <QuestionListProvider>
+          <UserProvider>
           <div className={classes.root}>
                   <ElevationScroll >
                       <ActionBar/>
@@ -63,9 +66,11 @@ function App() {
                   </ScrollTop>
                   <Switch >
                       <Route exact path={"/"} render={() => <QuestionList/>} />
+                      <Route path="/question/new" render={() => <QuestionForm/>} />
                       <Route path='/question/:questionId' render={(props) => <Question {...props}/>} />
                   </Switch>
           </div>
+          </UserProvider>
       </QuestionListProvider>
   );
 }
