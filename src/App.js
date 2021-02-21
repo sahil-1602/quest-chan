@@ -14,6 +14,7 @@ import ScrollTop from "./components/ScrollToTopButton";
 import {Route, Switch} from "react-router-dom";
 import Question from "./views/Question";
 import QuestionForm from "./views/QuestionForm";
+import Profile from './views/Profile';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,6 +69,7 @@ function App() {
                       <Route exact path={"/"} render={() => <QuestionList/>} />
                       <Route path="/question/new" render={() => <QuestionForm/>} />
                       <Route path='/question/:questionId' render={(props) => <Question {...props}/>} />
+                      <Route path='/profile/:userId' render={() => <Profile/>} />
                   </Switch>
           </div>
           </UserProvider>
